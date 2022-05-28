@@ -65,7 +65,7 @@ def processImage():
 
 
 newArray = [] # Array that is returned. Stored as [name,grade,description,source]
-app2 = ClarifaiApp(api_key='a83ecce289b64338a8036f3603e8d551') # api call
+app2 = ClarifaiApp(api_key='') # api call
 
 def main(url):
     newArray = []
