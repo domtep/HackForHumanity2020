@@ -1,0 +1,38 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+  color: rgba(253, 253, 253, 1);
+}
+
+.paragraph-edit {
+  font-weight: lighter;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #486A73; !important
+}
+
+.about-page-sub-title {
+  font-weight: lighter;
+  text-align: center;
+  color: #486A73;
+  font-size: 3rem;
+  margin: 2rem 0;
+}
+
+.background-beige {
+  background-color: rgb(245,245,220);
+}
+
+.background-darkblue {
+  background-color: #22313F;
+}
+
+.fill-first{
+  min-height: 100%;
+  height: 200px;
+  vertical-align: middle;
+}
+
+.fill {
+  min-height: 100vh;
+  height: auto;
+}

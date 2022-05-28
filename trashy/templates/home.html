@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<body class="center-box">
+  <div class="fill-first background-darkblue container-fluid text-center center-box">
+    <div>
+      <h1><br>Please Upload an Image</h1>
+      <hr style="width: 60%; background: #486A73;">
+      <p><input name='text' type="file" accept="image/*" method=POST id="file" onchange="loadFile(event)" style="display: none;"></p>
+      <label for="file" class="btn btn-front-margin btn-outline-light" style="cursor: pointer;">Upload Image</label>
+    </div>
+
+  </div>
+  <div class="fill background-beige container-fluid text-center">
+    <div class="row">
+      <div class="col-lg-6">
+        <h1 class="about-page-sub-title">Image</h1>
+        <hr style="width: 50%; background: #486A73;">
+        <img id="output" height="height" width="400" />
+      </div>
+      <div class="col-lg-6">
+        <h1 class="about-page-sub-title">Information</h1>
+        <hr style="width: 50%; background: #486A73;">
+        <h2><span class='about-page-sub-title' id='brand'></span></h2>
+         <h2><span class='about-page-sub-title' id='grade'></span></h2>
+        <h2 class='about-page-sub-title'><span class='paragraph-edit' id='facts'></span></h2>
+        <h2 class='about-page-sub-title'><a href=id class='paragraph-edit' id='link'></a> </h2>
+
+      </div>
+    </div>
+
+
+  </div>
+</body>
+
+<script>
+  var loadFile = function(event) {
+      const files = event.target.files
+      const formData = new FormData()
+      formData.append('myFile', files[0])
+
+      var image = document.getElementById('output');
+      image.src = URL.createObjectURL(event.target.files[0]);
+
+      document.getElementById("brand").innerHTML = '';
+      document.getElementById("grade").innerHTML = '';
+      document.getElementById("facts").innerHTML = '';
+      document.getElementById("link").innerHTML = '';
+      fetch('/processImage', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        document.getElementById("brand").innerHTML = 'Brand: '+ data[0];
+        document.getElementById("grade").innerHTML = 'Carbon Footprint: ' + data[1];
+        document.getElementById("facts").innerHTML = data[2];
+        document.getElementById("link").innerHTML = data[3];
+      })
+      .catch(error => {
+        console.error(error)
+        document.getElementById("brand").innerHTML = 'Image not recognized.<br> Please input a valid image.'
+        document.getElementById("grade").innerHTML = '';
+        document.getElementById("facts").innerHTML = '';
+        document.getElementById("link").innerHTML = '';
+      })
+  };
+</script>
+{% endblock %}
